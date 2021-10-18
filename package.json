@@ -1,0 +1,30 @@
+{
+  "name": "dofus-bot-telegram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && cross-env NODE_ENV=production node dist/index.js",
+    "dev": "cross-env NODE_ENV=development babel-node ./api/index.js",
+    "build": "babel ./api -d dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.4",
+    "axios": "^0.23.0",
+    "core-js": "^3.17.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "mongoose": "^6.0.10",
+    "regenerator-runtime": "^0.13.9",
+    "telegraf": "^4.4.2"
+  },
+  "devDependencies": {
+    "@babel/node": "^7.15.4"
+  }
+}
