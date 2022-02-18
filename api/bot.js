@@ -26,12 +26,14 @@ export async function startBot(context) {
   const { id, first_name: name } = context.message.chat;
   const user = await findUser(id);
   
-  if(!user) await createUser(id, name);
-  else await resetUserValues(id);
-
   context.deleteMessage();
-  context.reply(`Hola ${name}, ${startMessage}`, startMessageOptions);
-  setTimeout(() => context.reply('Ingresa la primera coordenada.'), 500);
+  if(!user) {
+    context.reply(`Hola ${name}, ${startMessage}`, startMessageOptions);
+    context.replyWithVideo('https://i.imgur.com/tSPdhgf.mp4');
+    await createUser(id, name);
+  }
+  else await resetUserValues(id);
+  context.reply('Ingresa la primera coordenada.');
 }
 
 export async function resetBot(context) {

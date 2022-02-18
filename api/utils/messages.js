@@ -1,4 +1,4 @@
-export const startMessage = `puedo ayudarte a encontrar el camino de las búsquedas del tesoro en Dofus.\n
+export const startMessage = `puedo ayudarte a encontrar el camino de las búsquedas del tesoro en Dofus. En este video podrás encontrar una guía de como utilizar este bot.\n
 Puedes reiniciar la búsqueda en cualquier momento utilizando este comando: /reset.\n
 Si deseas apoyar a los creadores originales puedes acceder a su <a href='https://dofus-map.com'>sitio web oficial</a> y realizar una donación.`;
 
