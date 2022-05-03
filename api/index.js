@@ -24,9 +24,4 @@ bot.on('text', handleCoords);
 bot.action(/top|right|bottom|left/, handleDirection);
 bot.on('callback_query', handleHint);
 
-bot.launch({
-  webhook: {
-    domain: 'https://dofus-map-bot.herokuapp.com',
-    port: process.env.PORT,
-  }
-});
+bot.launch();
