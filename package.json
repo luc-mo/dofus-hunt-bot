@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production node dist/index.js",
-    "dev": "cross-env NODE_ENV=development babel-node ./api/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./api/index.js",
     "build": "babel ./api -d dist"
   },
   "keywords": [],
@@ -25,6 +25,7 @@
     "telegraf": "^4.4.2"
   },
   "devDependencies": {
-    "@babel/node": "^7.15.4"
+    "@babel/node": "^7.15.4",
+    "nodemon": "^2.0.16"
   }
 }
