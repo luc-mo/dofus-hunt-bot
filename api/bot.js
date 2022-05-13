@@ -28,8 +28,8 @@ export async function startBot(context) {
   
   context.deleteMessage();
   if(!user) {
-    context.reply(`Hola ${name}, ${startMessage}`, startMessageOptions);
-    context.replyWithVideo('https://i.imgur.com/tSPdhgf.mp4');
+    await context.reply(`Hola ${name}, ${startMessage}`, startMessageOptions);
+    await context.replyWithVideo('https://i.imgur.com/tSPdhgf.mp4');
     await createUser(id, name);
   }
   else await resetUserValues(id);
@@ -40,16 +40,16 @@ export async function resetBot(context) {
   const { id } = context.message.chat;
   await resetUserValues(id);
 
-  context.deleteMessage();
-  context.reply('Se ha reiniciado la búsqueda, ingresa la primera coordenada.');
+  await context.deleteMessage();
+  await context.reply('Se ha reiniciado la búsqueda, ingresa la primera coordenada.');
 }
 
 export async function resetBotQuery(context) {
   const { id } = context.update.callback_query.from;
   await resetUserValues(id);
 
-  context.deleteMessage();
-  context.reply('Se ha reiniciado la búsqueda, ingresa la primera coordenada.');
+  await context.deleteMessage();
+  await context.reply('Se ha reiniciado la búsqueda, ingresa la primera coordenada.');
 }
 
 
@@ -84,25 +84,25 @@ export async function handleDirection(context) {
   const keyboard = hintData.map((currentHint, index) => [{ text: currentHint.name, callback_data: `${index}` }]);
   
   await updateHints(id, hintData);
-  context.deleteMessage();
+  await context.deleteMessage();
 
-  if(hintData.length !== 0) context.reply('Seleccione una pista:', {
+  if(hintData.length !== 0) await context.reply('Seleccione una pista:', {
     reply_markup: {
       inline_keyboard: keyboard,
     }
   });
-  else context.reply('No se han encontrado pistas. ¿Deseas cambiar la dirección?', directionKeyboard);
+  else await context.reply('No se han encontrado pistas. ¿Deseas cambiar la dirección?', directionKeyboard);
 }
 
 export async function handleHint(context) {
-  context.deleteMessage();
+  await context.deleteMessage();
   const { data: hintIndex, from: { id }} = context.update.callback_query;
   const { hints, direction } = await findUser(id);
   const { x, y, distance } = hints[hintIndex];
   
   await updateCoords(id, { x, y });
 
-  context.reply(`Nuevas coordenadas: [${x}, ${y}]\n`+
+  await context.reply(`Nuevas coordenadas: [${x}, ${y}]\n`+
     `Número de pasos: ${distance} ${parseDirection(direction)}\n\n`+
     `Ingresa la dirección de la pista siguiente.`, directionKeyboard);
 }
