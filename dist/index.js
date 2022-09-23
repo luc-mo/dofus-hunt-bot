@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.bot = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const telegraf_1 = require("telegraf");
+const mongoose_1 = __importDefault(require("mongoose"));
+require("module-alias/register");
+const bot_1 = require("controllers/bot");
+exports.bot = new telegraf_1.Telegraf(process.env.BOT_TOKEN);
+mongoose_1.default.connect(process.env.MONGO_URI);
+exports.bot.start(bot_1.BotController.startBot);
+exports.bot.command('help', bot_1.BotController.helpBot);
+exports.bot.command('reset', bot_1.BotController.resetBot);
+exports.bot.action('reset', bot_1.BotController.resetBotQuery);
+exports.bot.on('text', bot_1.BotController.handleCoordinates);
+exports.bot.action(/top|right|bottom|left/, bot_1.BotController.handleDirection);
+exports.bot.on('callback_query', bot_1.BotController.handleHints);
+exports.bot.launch();
